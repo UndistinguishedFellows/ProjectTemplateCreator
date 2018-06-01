@@ -9,10 +9,10 @@
         },
         "local_files":
         {
-            "index.html": "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js-Template",
-            "sketch.js": "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js-Template"
+            "index.html": "..\\p5.js-Template",
+            "sketch.js": "..\\p5.js-Template"
         },
-        "local_dirs": ["F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js-Template"]
+        "local_dirs": ["..\\p5.js-Template"]
     },
     "p5.js-tensorflow.js":
     {
@@ -23,9 +23,9 @@
         },
         "local_files":
         {
-            "index.html": "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js&Tensorflow.js-Template",
-            "sketch.js": "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js&Tensorflow.js-Template"
+            "index.html": "..\\p5.js&Tensorflow.js-Template",
+            "sketch.js": "..\\p5.js&Tensorflow.js-Template"
         },
-        "local_dirs": ["F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js&Tensorflow.js-Template"]
+        "local_dirs": ["..\\p5.js&Tensorflow.js-Template"]
     }
 }

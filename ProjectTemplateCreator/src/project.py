@@ -1,14 +1,16 @@
-import templates, sys
+import templates, sys, os
 
 if __name__ == "__main__":
 
     try:
         proj = sys.argv[1]
     except IndexError:
-        print("WARNING: No template type argument passed, will use default one instead.")
+        print("WARNING: No project template passed, will use default one instead.")
         proj = "default"
 
-    tmpl = templates.Templates(data_url=templates.DEFAULT_JSON_URL)
+    local_json = os.path.join(os.path.dirname(os.path.realpath(__file__)), templates.DEFAULT_JSON_NAME)
+    #data_url=templates.DEFAULT_JSON_URL
+    tmpl = templates.Templates(data_path=local_json) # data_url=templates.DEFAULT_JSON_URL)
 
     if proj == "-h":
         tmpl.Help()

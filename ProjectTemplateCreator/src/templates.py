@@ -6,8 +6,8 @@ LOCAL_FILES = 1 << 1
 LOCAL_DIRS = 1 << 2
 ALL = URLS | LOCAL_FILES | LOCAL_DIRS
 
-DEFAULT_JSON_URL = "https://bitbucket.org/Josef21296/various-resources/raw/56762ae64644c9ae65a7b0ce26220799010aaa28/Templates/templates_source.json"
-DEFAULT_JSON_PATH = "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\src\\templates_source.json"
+DEFAULT_JSON_URL = "https://bitbucket.org/Josef21296/various-resources/raw/55ac88d9f8d97a4649b67cf70596f8bcd16af066/Templates/templates_source.json"
+DEFAULT_JSON_NAME = "templates_source.json"
 
 class Templates:
     def __init__(self, data_path="", data_url=""):
@@ -19,6 +19,7 @@ class Templates:
             self.LoadLocalData(data_path)
         else:
             print("WARNING: No template info provided.")
+            self.data = 0
 
 
 
@@ -39,6 +40,10 @@ class Templates:
     #   (LOCAL_FILES: only searches for defined local single files),
     #   (LOCAL_DIRS: only searches for defined local dirs and copes all files in there)
     def CopyTemplate(self, project, destination=os.getcwd(), origin=ALL):
+
+        if not self.data:
+            print("ERROR: Templates data not loaded!")
+            return
 
         if project == "default":
             try:
