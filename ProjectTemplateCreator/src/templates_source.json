@@ -1,0 +1,31 @@
+{
+    "default": "p5.js",
+    "p5.js":
+    {
+        "urls":
+        {
+            "index.html": "https://bitbucket.org/Josef21296/various-resources/raw/master/Templates/p5.js-Template/index.html",
+            "sketch.js": "https://bitbucket.org/Josef21296/various-resources/raw/master/Templates/p5.js-Template/sketch.js"
+        },
+        "local_files":
+        {
+            "index.html": "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js-Template",
+            "sketch.js": "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js-Template"
+        },
+        "local_dirs": ["F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js-Template"]
+    },
+    "p5.js-tensorflow.js":
+    {
+        "urls":
+        {
+            "index.html": "https://bitbucket.org/Josef21296/various-resources/raw/39d6cd13f1fd27ec716360ad391d4f758cb0a269/Templates/p5.js%26Tensorflow.js-Template/index.html",
+            "sketch.js": "https://bitbucket.org/Josef21296/various-resources/raw/master/Templates/p5.js%26Tensorflow.js-Template/sketch.js"
+        },
+        "local_files":
+        {
+            "index.html": "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js&Tensorflow.js-Template",
+            "sketch.js": "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js&Tensorflow.js-Template"
+        },
+        "local_dirs": ["F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\p5.js&Tensorflow.js-Template"]
+    }
+}

@@ -1,14 +1,16 @@
 import templates, sys
 
-if __name__ == "__main__":
+DEFAULT_JSON_URL = "https://bitbucket.org/Josef21296/various-resources/raw/56762ae64644c9ae65a7b0ce26220799010aaa28/Templates/templates_source.json"
 
-    tmpl = templates.Templates()
+if __name__ == "__main__":
 
     try:
         arg = sys.argv[1]
     except IndexError:
-        print("WARNING: No template type argument passed, will use default one instead [p5.js].")
-        arg = "p5.js"
+        print("WARNING: No template type argument passed, will use default one instead.")
+        arg = "default"
+
+    tmpl = templates.Templates(data_url=DEFAULT_JSON_URL)
 
     if arg == "-h":
         tmpl.Help()

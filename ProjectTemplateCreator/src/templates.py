@@ -1,4 +1,4 @@
-import os, sys, shutil
+import os, sys, shutil, json
 import urllib.request as req
 
 URLS = 1 << 0
@@ -6,34 +6,29 @@ LOCAL_FILES = 1 << 1
 LOCAL_DIRS = 1 << 2
 ALL = URLS | LOCAL_FILES | LOCAL_DIRS
 
+DEFAULT_JSON_PATH = "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\src\\templates_source.json"
+
 class Templates:
-    def __init__(self):
-        self.data = {
-            'p5.js':
-            {
-            'urls': {
-            'index.html': "https://bitbucket.org/Josef21296/various-resources/raw/master/Templates/p5.js-Template/index.html",
-            'sketch.js': "https://bitbucket.org/Josef21296/various-resources/raw/master/Templates/p5.js-Template/sketch.js"
-                },
-            'local_files': {
-                'index.html': "F:\Documents\GitHub\ProjectTemplateCreator\ProjectTemplateCreator\p5.js-Template",
-                'sketch.js': "F:\Documents\GitHub\ProjectTemplateCreator\ProjectTemplateCreator\p5.js-Template"
-                },
-            'local_dirs': ["F:\Documents\GitHub\ProjectTemplateCreator\ProjectTemplateCreator\p5.js-Template"]
-            },
-            'p5.js-tensorflow.js':
-            {
-                'urls': {
-                'index.html': "https://bitbucket.org/Josef21296/various-resources/raw/39d6cd13f1fd27ec716360ad391d4f758cb0a269/Templates/p5.js%26Tensorflow.js-Template/index.html",
-                'sketch.js': "https://bitbucket.org/Josef21296/various-resources/raw/master/Templates/p5.js%26Tensorflow.js-Template/sketch.js"
-                    },
-                'local_files': {
-                    'index.html': "F:\Documents\GitHub\ProjectTemplateCreator\ProjectTemplateCreator\p5.js&Tensorflow.js-Template",
-                    'sketch.js': "F:\Documents\GitHub\ProjectTemplateCreator\ProjectTemplateCreator\p5.js&Tensorflow.js-Template"
-                    },
-                'local_dirs': ["F:\Documents\GitHub\ProjectTemplateCreator\ProjectTemplateCreator\p5.js&Tensorflow.js-Template"]
-            }
-            }
+    def __init__(self, data_path=DEFAULT_JSON_PATH, data_url=""):
+
+        # Will priorize online hosted one
+        if data_url != "":
+            self.LoadDataFromUrl(data_url)
+        elif data_path != "":
+            self.LoadLocalData(data_path)
+        else:
+            print("ERROR: Json source file invalid.")
+
+    def LoadLocalData(self, path):
+        print("Loading templates data from local json: " + path);
+        with open(path) as file_data:
+            self.data = json.load(file_data)
+
+    def LoadDataFromUrl(self, url):
+        print("Loading templates data from hosted json: " + url);
+        with req.urlopen(url) as res:
+            self.data = json.loads(res.read())
+
 
     # Copy a template project. Origin determines from where
     #   (ALL: tries to get all the sources available),
@@ -41,6 +36,13 @@ class Templates:
     #   (LOCAL_FILES: only searches for defined local single files),
     #   (LOCAL_DIRS: only searches for defined local dirs and copes all files in there)
     def CopyTemplate(self, project, destination=os.getcwd(), origin=ALL):
+
+        if project == "default":
+            try:
+                project = self.data["default"]
+            except KeyError:
+                print("ERROR: Default key not setted.")
+                return
 
         if project in self.data:
             print("Creating project from template: " + project)
@@ -87,8 +89,11 @@ class Templates:
         print("\t-h: Help.")
         print("\t<none>: Will use p5.js as default.")
 
+        print("--------------------------------------------")
+
         for proj, data in self.data.items():
             print("\t" + proj + ": ")
             print("\t \t-Have urls: " + str('urls' in data))
             print("\t \t-Have local files: " + str('local_files' in data))
             print("\t \t-Have local dirs: " + str('local_dirs' in data))
+            print("--------------------------------------------")
