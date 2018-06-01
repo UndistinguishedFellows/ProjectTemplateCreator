@@ -6,10 +6,11 @@ LOCAL_FILES = 1 << 1
 LOCAL_DIRS = 1 << 2
 ALL = URLS | LOCAL_FILES | LOCAL_DIRS
 
+DEFAULT_JSON_URL = "https://bitbucket.org/Josef21296/various-resources/raw/56762ae64644c9ae65a7b0ce26220799010aaa28/Templates/templates_source.json"
 DEFAULT_JSON_PATH = "F:\\Documents\\GitHub\\ProjectTemplateCreator\\ProjectTemplateCreator\\src\\templates_source.json"
 
 class Templates:
-    def __init__(self, data_path=DEFAULT_JSON_PATH, data_url=""):
+    def __init__(self, data_path="", data_url=""):
 
         # Will priorize online hosted one
         if data_url != "":
@@ -17,7 +18,9 @@ class Templates:
         elif data_path != "":
             self.LoadLocalData(data_path)
         else:
-            print("ERROR: Json source file invalid.")
+            print("WARNING: No template info provided.")
+
+
 
     def LoadLocalData(self, path):
         print("Loading templates data from local json: " + path);
@@ -39,7 +42,7 @@ class Templates:
 
         if project == "default":
             try:
-                project = self.data["default"]
+                project = self.data['default']
             except KeyError:
                 print("ERROR: Default key not setted.")
                 return
@@ -92,8 +95,12 @@ class Templates:
         print("--------------------------------------------")
 
         for proj, data in self.data.items():
-            print("\t" + proj + ": ")
-            print("\t \t-Have urls: " + str('urls' in data))
-            print("\t \t-Have local files: " + str('local_files' in data))
-            print("\t \t-Have local dirs: " + str('local_dirs' in data))
+            if proj == "default":
+                print("\tDefault: " + str(data))
+            else:
+                print("\t" + proj + ": ")
+                print("\t \t-Have urls: " + str('urls' in data))
+                print("\t \t-Have local files: " + str('local_files' in data))
+                print("\t \t-Have local dirs: " + str('local_dirs' in data))
+
             print("--------------------------------------------")
