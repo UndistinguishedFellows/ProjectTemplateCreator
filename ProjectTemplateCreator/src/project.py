@@ -9,8 +9,7 @@ if __name__ == "__main__":
         proj = "default"
 
     local_json = os.path.join(os.path.dirname(os.path.realpath(__file__)), templates.DEFAULT_JSON_NAME)
-    #data_url=templates.DEFAULT_JSON_URL
-    tmpl = templates.Templates(data_path=local_json) # data_url=templates.DEFAULT_JSON_URL)
+    tmpl = templates.Templates(data_path=local_json, data_url=templates.DEFAULT_JSON_URL)
 
     if proj == "-h":
         tmpl.Help()

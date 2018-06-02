@@ -10,6 +10,7 @@ DEFAULT_JSON_URL = "https://bitbucket.org/Josef21296/various-resources/raw/55ac8
 DEFAULT_JSON_NAME = "templates_source.json"
 
 class Templates:
+# Creates the Templates object. Templates origin can be passed as parameter; if both local and hosted are provided, hosted one will be used.
     def __init__(self, data_path="", data_url=""):
 
         # Will priorize online hosted one
@@ -22,23 +23,24 @@ class Templates:
             self.data = 0
 
 
-
+# Loads the templates data from a local json file.
     def LoadLocalData(self, path):
         print("Loading templates data from local json: " + path);
         with open(path) as file_data:
             self.data = json.load(file_data)
 
+# Loads the templates data from a hosted json file.
     def LoadDataFromUrl(self, url):
         print("Loading templates data from hosted json: " + url);
         with req.urlopen(url) as res:
             self.data = json.loads(res.read())
 
 
-    # Copy a template project. Origin determines from where
-    #   (ALL: tries to get all the sources available),
-    #   (URLS: only search for files hoested online),
-    #   (LOCAL_FILES: only searches for defined local single files),
-    #   (LOCAL_DIRS: only searches for defined local dirs and copes all files in there)
+# Copy a template project. Origin determines from where
+#   (ALL: tries to get all the sources available),
+#   (URLS: only search for files hoested online),
+#   (LOCAL_FILES: only searches for defined local single files),
+#   (LOCAL_DIRS: only searches for defined local dirs and copes all files in there)
     def CopyTemplate(self, project, destination=os.getcwd(), origin=ALL):
 
         if not self.data:
@@ -75,23 +77,24 @@ class Templates:
         else:
             print("ERROR: Project not found... [" + project + "].")
 
-    # Copy a single file from the url
+# Copy a single file from the url
     def CopyFileFromUrl(self, url, dst_file, dst_dir):
         with req.urlopen(url) as response, open(os.path.join(dst_dir, dst_file), 'wb') as out_file:
             shutil.copyfileobj(response, out_file)
 
-    # Copy a single src file from local src directory to a dst directory
+# Copy a single src file from local src directory to a dst directory
     def CopyFileFromLocal(self, src_file, src_dir, dst_dir):
         if os.path.isfile(os.path.join(src_dir, src_file)):
             shutil.copy(os.path.join(src_dir, src_file), os.path.join(dst_dir, src_file))
 
-    # Copy all files from a src directory into the des directory
+# Copy all files from a src directory into the des directory
     def CopyFilesFromDir(self, src_dir, dst_dir):
         for file_name in os.listdir(src_dir):
             file = os.path.join(src_dir, file_name)
             if os.path.isfile(file):
                 shutil.copy(file, os.path.join(dst_dir, file_name))
 
+# Displays the help info about the application and list all the templates abailable
     def Help(self):
         print(" - Help: This script will create a copy of a template into your current directory. \nArguments:")
         print("\t-h: Help.")
