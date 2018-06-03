@@ -11,7 +11,7 @@ DEFAULT_JSON_NAME = "templates_source.json"
 
 class Templates:
 # Creates the Templates object. Templates origin can be passed as parameter; if both local and hosted are provided, hosted one will be used.
-    def __init__(self, data_path="", data_url=""):
+    def __init__(self, data_path="", data_url="", warn_if_empty=True):
 
         # Will priorize online hosted one
         if data_url != "":
@@ -19,7 +19,8 @@ class Templates:
         elif data_path != "":
             self.LoadLocalData(data_path)
         else:
-            print("WARNING: No template info provided.")
+            if warn_if_empty == True:
+                print("WARNING: No template info provided.")
             self.data = 0
 
 
@@ -34,6 +35,9 @@ class Templates:
         print("Loading templates data from hosted json: " + url);
         with req.urlopen(url) as res:
             self.data = json.loads(res.read())
+
+    def IsTemplateDataLoaded(self):
+        return self.data != 0
 
 
 # Copy a template project. Origin determines from where

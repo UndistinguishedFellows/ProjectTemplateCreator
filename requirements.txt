@@ -1,0 +1,7 @@
+blessings==1.6.1
+docopt==0.6.2
+PyQt5==5.10.1
+pyqt5-intaller==5.7.0
+pyqt5-tools==5.9.0.1.2
+sip==4.19.8
+wget==3.2
