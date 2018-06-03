@@ -1,0 +1,16 @@
+Designer located in .\ProjectTemplateCreator\ProjTempl-env\Lib\site-packages\pyqt5-tools\designer.exe
+
+Generate .py file from .ui:
+    python -m PyQt5.uic.pyuic -x [FILENAME].ui -o [FILENAME].py
+    pyuic -x [FILENAME].ui -o [FILENAME].py
+
+Importing the ui example:
+    from [ui filename without .ui] import [Ui class name]
+    # Other imports
+
+    class ApplicationWindow(QtWidgets.QMainWindow):
+        def __init__(self):
+            super(ApplicationWindow, self).__init__()
+
+            self.ui = [Ui class name]()
+            self.ui.setupUi(self)
